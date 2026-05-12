@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>DISCUS | Comunidades de Estudo e Evolução Acadêmica</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fbfd;
+      color: #1f2a3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* cores suaves e transições sutis */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-soft: #f2f5f9;
+      --card-bg: #ffffff;
+      --primary: #3b82f6;
+      --primary-light: #eef2ff;
+      --primary-dark: #2563eb;
+      --accent-mint: #d1fae5;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --border-light: #e2e8f0;
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.03);
+      --shadow-hover: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3b82f6, #2dd4bf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      font-weight: 500;
+      color: #1e293b;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: calc(var(1,1,1));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-light);
+      padding: 8px 20px;
+      border-radius: 40px;
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white !important;
+      padding: 8px 24px;
+      border-radius: 40px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: scale(0.98);
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 60px 0 40px;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(to right, #1e293b, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 24px;
+    }
+
+    .stat {
+      background: var(--bg-soft);
+      padding: 12px 20px;
+      border-radius: 48px;
+      font-weight: 600;
+    }
+
+    .hero-illustration {
+      flex: 1;
+      background: linear-gradient(145deg, #eef2ff, #e2f3f0);
+      border-radius: 48px;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--primary-dark);
+      font-size: 5rem;
+    }
+
+    /* seções gerais */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 48px auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-icon {
+      font-size: 2.6rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-muted);
+    }
+
+    /* timeline / progresso  */
+    .progress-showcase {
+      background: var(--bg-soft);
+      border-radius: 48px;
+      padding: 40px;
+      margin-top: 20px;
+    }
+
+    .progress-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .points-card {
+      background: white;
+      border-radius: 32px;
+      padding: 20px 28px;
+      text-align: center;
+      flex: 1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .points-value {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #2dd4bf;
+    }
+
+    /* parceiros e auxílio */
+    .sponsor-area {
+      background: linear-gradient(110deg, #f0f9ff, #ffffff);
+      border-radius: 48px;
+      padding: 48px 40px;
+      margin: 40px 0;
+    }
+
+    /* comunidades online */
+    .community-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      border-radius: 40px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    /* rodapé */
+    footer {
+      padding: 48px 0 32px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* responsivo */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .navbar {
+        flex-direction: column;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .progress-stats {
+        flex-direction: column;
+      }
+    }
+
+    /* animações suaves */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button, .btn-primary, .btn-outline {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">DISCUS<span>.</span></div>
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#comunidades">Comunidades</a>
+        <a href="#progres">Evolução</a>
+        <a href="#auxilio">Auxílio</a>
+        <a href="app/public/index.html" class="btn-outline">Entrar</a>
+        <a href="app/public/index.html" class="btn-primary">Criar conta</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <h1>Estude em comunidade,<br> evolua com propósito.</h1>
+        <p>DISCUS conecta estudantes, professores e parceiros em um ecossistema colaborativo para combater a evasão escolar e transformar aprendizado em conquistas reais.</p>
+        <div class="hero-stats">
+          <div class="stat"><i class="fas fa-users"></i> +12 mil estudantes</div>
+          <div class="stat"><i class="fas fa-file-pdf"></i> +3.200 materiais</div>
+          <div class="stat"><i class="fas fa-chart-line"></i> Evolução em tempo real</div>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <i class="fas fa-chalkboard-user fa-3x"></i>
+        <p style="font-size: 1rem; margin-top: 1rem; color: #2563eb;">Aprendizado colaborativo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sobre + áreas de estudo -->
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title">Estude para qualquer objetivo</h2>
+      <p class="section-sub">Do ENEM a concursos, de exatas a humanas — encontre comunidades específicas, materiais filtrados por inteligência e análises personalizadas.</p>
+      <div class="cards-grid fade-up">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>PDFs didáticos</h3>
+          <p>Biblioteca colaborativa com resumos, apostilas e exercícios de todas as disciplinas, atualizados por professores e alunos.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-video"></i></div>
+          <h3>Vídeoaulas</h3>
+          <p>Playlists curadas e lives gravadas com especialistas, além de canais parceiros dentro do próprio ambiente DISCUS.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-chalkboard"></i></div>
+          <h3>Simulados adaptativos</h3>
+          <p>Simulados personalizados com base no seu desempenho e trilhas de aprendizado sugeridas por análise de dados.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-brain"></i></div>
+          <h3>Análise de desempenho</h3>
+          <p>Relatórios baseados na parceria com professores, identificando pontos de melhoria e sugerindo conteúdos estratégicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comunidades online e materiais compartilhados -->
+  <section id="comunidades" style="background: var(--bg-soft); border-bottom: none;">
+    <div class="container">
+      <div class="community-badge"><i class="fas fa-globe"></i> +150 comunidades ativas</div>
+      <h2 class="section-title">Comunidades que compartilham conhecimento</h2>
+      <p class="section-sub">Crie ou participe de grupos de estudo por matéria, série, vestibular ou até por interesses especiais. Troque materiais, faça desafios e cresça junto.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <i class="fas fa-flask card-icon"></i>
+          <h3>Comunidade Ciências da Natureza</h3>
+          <p>Mapas mentais, experimentos e listas de exercícios ENEM. +2.400 membros ativos.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-language card-icon"></i>
+          <h3>Polyglot Hub</h3>
+          <p>Inglês, Espanhol e Libras — materiais audiovisuais, dicas de redação e simulados de proficiência.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-code card-icon"></i>
+          <h3>Tech & Lógica</h3>
+          <p>Programação, matemática aplicada e projetos colaborativos com mentoria de professores parceiros.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-chart-pie card-icon"></i>
+          <h3>Humanidades em Foco</h3>
+          <p>Sociologia, filosofia, história e atualidades. Debates e resumos dinâmicos.</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="#" class="btn-primary" style="display: inline-block;">Explorar todas comunidades →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evolução do aluno + Pontuação e análise professores -->
+  <section id="progres">
+    <div class="container">
+      <h2 class="section-title">Acompanhamento inteligente da sua evolução</h2>
+      <p class="section-sub">Professores e coordenadores analisam dados gerados a partir das suas atividades, provas e engajamento nas comunidades. O resultado: feedback personalizado e conquistas que viram pontos.</p>
+      <div class="progress-showcase fade-up">
+        <div class="progress-stats">
+          <div class="points-card">
+            <i class="fas fa-star" style="color: #fbbf24; font-size: 2rem;"></i>
+            <div class="points-value">1,280</div>
+            <p>Seus pontos acumulados</p>
+            <small style="color: #3b82f6;">+240 pontos este mês</small>
+          </div>
+          <div class="points-card">
+            <i class="fas fa-chart-simple"></i>
+            <h3>Nível atual</h3>
+            <div class="points-value" style="font-size: 2rem;">DISCUS Diamond</div>
+            <p>Top 8% de engajamento na sua escola</p>
+          </div>
+          <div class="points-card">
+            <i class="fas fa-chalkboard-user"></i>
+            <h3>Análise do Professor</h3>
+            <p>“Evolução notável em matemática — recomenda-se foco em geometria espacial.”</p>
+            <i class="fas fa-check-circle" style="color:#10b981;"></i> Relatório integrado
+          </div>
+        </div>
+        <div style="margin-top: 32px; background: white; border-radius: 32px; padding: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span>Progresso em matemática</span>
+            <span>78%</span>
+          </div>
+          <div style="background: #e2e8f0; border-radius: 32px; height: 10px;">
+            <div style="width: 78%; background: #3b82f6; height: 10px; border-radius: 32px;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <span>🎯 Próxima conquista: "Mestre dos Simulados" (350 pts)</span>
+            <span><i class="fas fa-trophy"></i> +4 badges</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patrocínios e auxílio → amenizar evasão escolar -->
+  <section id="auxilio">
+    <div class="container">
+      <div class="sponsor-area fade-up">
+        <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between;">
+          <div style="flex:1">
+            <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color:#2dd4bf;"></i>
+            <h2 style="margin: 16px 0 8px;">Pontos que viram auxílio real</h2>
+            <p style="margin-bottom: 20px;">Cada atividade, simulado e conquista na escola gera pontos DISCUS. Parceiros e patrocinadores transformam esses pontos em benefícios: vale-transporte, material escolar, bolsas de estudo e auxílios financeiros. Uma ponte para reduzir a evasão e valorizar a dedicação.</p>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+              <span style="background: white; border-radius: 40px; padding: 6px 18px;"><i class="fas fa-building"></i> Fundação Educar+</span>
+              <span style="background: white; border-radius: 40px; padding: 6px 18px;"><i class="fas fa-laptop-code"></i> TechForGood</span>
+              <span style="background: white; border-radius: 40px; padding: 6px 18px;"><i class="fas fa-graduation-cap"></i> Instituto Aprender</span>
+            </div>
+          </div>
+          <div style="flex:1; background: #ffffffcc; border-radius: 32px; padding: 24px; text-align: center;">
+            <h3><i class="fas fa-coins"></i> Conversão de pontos</h3>
+            <p style="font-size: 2rem; font-weight: bold; color: #0f172a;">1.250 pts = R$50 auxílio</p>
+            <p>✔️ Kit escolar &nbsp;|&nbsp; ✔️ Passe livre estudantil &nbsp;|&nbsp; ✔️ Bolsa parcial curso preparatório</p>
+            <button class="btn-primary" style="margin-top: 16px; background: #10b981;">Resgatar benefícios</button>
+          </div>
+        </div>
+        <div style="margin-top: 32px; font-size: 0.9rem; background: #eef2ff; border-radius: 32px; padding: 16px; text-align: center;">
+          <i class="fas fa-chart-line"></i> <strong>Impacto contra evasão:</strong> Desde o início do DISCUS, escolas parceiras registraram redução de <strong>34%</strong> na evasão escolar entre alunos engajados nas comunidades.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Áreas de busca: estude qualquer coisa que desejar -->
+  <section style="background: white;">
+    <div class="container">
+      <h2 class="section-title">Encontre o que você precisa estudar</h2>
+      <p class="section-sub">Do simulado de física quântica ao resumo de literatura brasileira. Nossa busca inteligente conecta você a materiais, videoaulas e grupos ativos em segundos.</p>
+      <div style="max-width: 700px; margin: 0 auto;">
+        <div style="display: flex; background: white; border-radius: 60px; border: 1px solid var(--border-light); padding: 6px 6px 6px 20px; box-shadow: var(--shadow-sm);">
+          <input type="text" placeholder="Ex: Funções trigonométricas, redação ENEM, Python básico..." style="flex:1; border: none; outline: none; font-size: 1rem; padding: 12px 0;">
+          <button style="background: var(--primary); border: none; border-radius: 40px; padding: 10px 28px; color: white; font-weight: 600;"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px;">
+          <span class="community-badge" style="background:#e0f2fe;">#Matematica</span>
+          <span class="community-badge" style="background:#e0f2fe;">#Biologia</span>
+          <span class="community-badge" style="background:#e0f2fe;">#História</span>
+          <span class="community-badge" style="background:#e0f2fe;">#SimuladoEnem</span>
+          <span class="community-badge" style="background:#e0f2fe;">#Programação</span>
+          <span class="community-badge" style="background:#e0f2fe;">#Literatura</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action final -->
+  <section style="border-bottom: none;">
+    <div class="container" style="text-align: center;">
+      <div style="background: var(--primary-light); border-radius: 56px; padding: 56px 24px;">
+        <h2 style="font-size: 2rem;">Junte-se à revolução educacional</h2>
+        <p style="max-width: 600px; margin: 20px auto;">Compartilhe conhecimento, ganhe pontos, receba auxílio e ajude a construir um futuro com menos evasão escolar. Professores, alunos e patrocinadores já fazem parte.</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="#" class="btn-primary" style="background: #1e293b;">Quero ser aluno</a>
+          <a href="#" class="btn-outline" style="background: white;">Sou professor/parceiro</a>
+        </div>
+        <p style="margin-top: 24px; font-size: 0.85rem;"><i class="fas fa-chart-simple"></i> +350 escolas integradas · 32 patrocinadores ativos</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="logo" style="justify-content: center; display: flex;">DISCUS<span>.</span></div>
+    <p style="margin: 16px 0 8px;">© 2025 DISCUS — Ecossistema de aprendizado colaborativo e combate à evasão escolar.</p>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-top: 16px;">
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-linkedin"></i>
+      <i class="fab fa-github"></i>
+    </div>
+  </div>
+</footer>
+
+<!-- Script para animação fade-up ao scroll -->
+<script>
+  const fadeElements = document.querySelectorAll('.fade-up');
+  
+  function checkFadeIn() {
+    fadeElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect.top <= windowHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', checkFadeIn);
+  window.addEventListener('resize', checkFadeIn);
+  checkFadeIn(); // verificar ao carregar
+</script>
+
+<!-- Mensagem interativa no botão de busca (simples demo) -->
+<script>
+  const searchBtn = document.querySelector('.container .container button');
+  if(searchBtn) {
+    const btnSearch = document.querySelector('button:has(.fa-search)');
+    if(btnSearch) {
+      btnSearch.addEventListener('click', function(e) {
+        const inputSearch = document.querySelector('input[placeholder*="Funções"]');
+        if(inputSearch && inputSearch.value.trim() !== "") {
+          alert(`🔍 Buscando materiais e comunidades sobre: "${inputSearch.value.trim()}"\nEm breve você terá conteúdos personalizados!`);
+        } else {
+          alert("✨ Digite um assunto, disciplina ou simulado e explore comunidades incríveis no DISCUS.");
+        }
+      });
+    }
+  }
+
+  // Adicionar pequeno efeito nos cards
+  const allCards = document.querySelectorAll('.card');
+  allCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.2s, box-shadow 0.2s';
+    });
+  });
+</script>
+</body>
+</html>
